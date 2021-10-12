@@ -1,0 +1,14 @@
+
+#!/bin/bash
+if curl -I "https://www.google.co.in" 2>&1 | grep -w "200\|301" ; then
+    echo "magesh.co.in is up"
+else
+    echo "magesh.co.in is down"
+fi
+
+#!/bin/bash
+if curl -I "https://www.magesh.co.in" 2>&1 | grep -w "200\|301" ; then
+    echo "magesh.co.in is up"
+else
+    echo "magesh.co.in is down"
+fi

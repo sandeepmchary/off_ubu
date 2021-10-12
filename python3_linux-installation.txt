@@ -1,0 +1,16 @@
+Step1: Check for wget if not then install using yum install wget 
+Step2: Download requried package using wget 
+       wget https://www.python.org/ftp/python/3.7...
+Step3: Extract the downloaded package using tar -xvzf Python-3.7.0.tgz
+Step4: yum install gcc openssl-devel bzip2-devel libffi-devel
+Step4: Navigate to extracted file and then follow below steps
+ cd Python-3.7.0.tgz
+      ./configure 
+  (./configure --enable-optimizations 
+   ./configure --prefix=/opt
+   The default installation location is: /usr/local/bin)
+      make
+      make altinstall (Generally we have to use make install but already if you have python then use altinstall)
+Step5: Now verify installation by running
+        python3 --version
+ pip3 --version
