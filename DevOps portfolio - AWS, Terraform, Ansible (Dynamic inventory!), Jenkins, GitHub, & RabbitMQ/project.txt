@@ -1,0 +1,37 @@
+- first install jenkins in centos
+------------------------------------------------------------------
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade
+sudo yum install epel-release java-11-openjdk-devel
+sudo yum install jenkins
+sudo systemctl daemon-reload
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+------------------------------------------------------------------
+
+cd ~
+ssh-keygen
+Enter file in which to save the key (/home/centos/.ssh/id_rsa): /home/centos/.ssh/jenkins_rsa
+copy the jenkins_rsa key
+    Dashboard
+    Credentials
+    System
+    Global credentials (unrestricted)
+    add credentials
+    ssh username with private key
+    scope
+    global
+    ID: jenkins
+-----------------------------------
+again add credentials for aws keys
+with aws key and secret key
+-----------------------------
+create api token
+Dashboard
+Manage jenkins
+Manage users
+{user}
+configure
+
