@@ -1,0 +1,8 @@
+mkdir {jenkins_data,sonarqube}
+docker run -p 8080:8080 -p 50000:50000 -v /home/ec2-user/jenkins:/var/jenkins_home jenkins/jenkins:lts
+docker run -d -p 9000:9000 -v /home/ec2-user/sonarqube:/var/sonarqube_home sonarqube:lts 
+docker run -d -p 8081:8081 --name nexus -v /home/ec2-user/nexus-data:/nexus-data sonatype/nexus3
+
+
+
+docker run -d -p 8081:8081 --name nexus -e INSTALL4J_ADD_VM_PARAMS="-Xms2703m -Xmx2703m -XX:MaxDirectMemorySize=2703m -Djava.util.prefs.userRoot=/home/ec2-user/nexus-data" sonatype/nexus3
