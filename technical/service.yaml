@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-sam
+  labels:
+    apps: my-sam
+spec:
+  selector:
+    app: my-sam
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 80
+      nodePort: 31200
