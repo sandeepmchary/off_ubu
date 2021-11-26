@@ -1,0 +1,57 @@
+---
+  - hosts: localhost
+    become: true
+    connection: local
+    tasks:
+      - name: Install items
+        ansible.builtin.package:
+          name: "{{ item }}"
+          state: present
+        loop:
+          - wget
+          - unzip
+          - mysql-server
+          - python3-pip
+          - libmysqlclient-dev
+          - python3-dev
+          - python3-mysqldb
+      - name: Copy rpm file
+        get_url:
+          url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+          dest: /tmp/mysql-community-release-el7-5.noarch.rpm
+      - name: Install rpm from local
+        yum:
+          name: /tmp/mysql-community-release-el7-5.noarch.rpm
+          state: present
+      - name: Install mysql
+        package:
+          name: mysql-server
+          state: present
+      - name: Start mysql
+        service:
+          name: mysqld
+          state: started
+      - name: Install epel
+        package:
+          name: epel-release
+          state: present
+      - name: Install pip
+        package:
+          name: python3-pip
+          state: present
+        tags:
+          - pip
+      - name: Make sure that pymysql is installed
+        pip:
+          name: PyMySQL
+          state: present
+        tags:
+          - pmysql
+      - name: Create database user with name 'bob' and password '12345' with all database privileges
+        community.mysql.mysql_user:
+          name: root
+          password: admin
+          priv: '*.*:ALL'
+          state: present
+        tags:
+          - root

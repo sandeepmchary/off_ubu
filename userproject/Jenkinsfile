@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('docker') {
+            steps {
+            sshagent(['dellubu']) {
+            sh '''ssh dellubu@10.182.0.4
+                ifconfig -a
+                docker run hello-world'''
+}
+    }
+
+            }
+        }
+    }
+}
